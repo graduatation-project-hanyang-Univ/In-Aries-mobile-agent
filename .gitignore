@@ -1,37 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@yeonsoochoi 
-hyperledger
-/
-aries-mobile-agent-react-native
-12
-33
-12
-Code
-Issues
-14
-Pull requests
-4
-Actions
-Projects
-1
-Security
-Insights
-aries-mobile-agent-react-native/.gitignore
-@NeilSMyers
-NeilSMyers Feature UI update (#65)
-…
-Latest commit e030749 2 days ago
- History
- 4 contributors
-@JamesKEbert@NeilSMyers@TheTreek@DavidClawson
- 161 lines (125 sloc)  2.46 KB
-  
 # Logs
 logs
 *.log
@@ -193,16 +159,3 @@ buck-out/
 # CocoaPods
 ios/Pods/*
 !ios/Pods/Frameworks
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Loading complete
