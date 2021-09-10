@@ -6,6 +6,11 @@
 
 > [관련이슈](https://github.com/hyperledger/aries-mobile-agent-react-native/issues/53#issuecomment-892500638)
 
+## 버전
+- react-native-cli : 2.0.1
+- react-antive : 0.61.5
+- node : 12.22.1
+
 ## Mediator 설정
 - 위 AFJ 다운로드 후 해당 repo에서 ```npm install```
 - 동일 repo에서 ```docker-compose -f docker/docker-compose-mediators.yml -f docker/docker-compose-mediators-ngrok.yml up --build```
