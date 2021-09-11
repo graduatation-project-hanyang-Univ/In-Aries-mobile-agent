@@ -92,7 +92,7 @@ function ListCredentials(props: IListCredentials) {
             <View key={i} style={[AppStyles.tableItem, Styles.tableItem, AppStyles.backgroundSecondary]}>
               <View>
                 <Text style={[{ fontSize: 18, top: 8 }, AppStyles.textWhite, AppStyles.textBold]}>
-                  Driver's License
+                  {credential.attributes.name}
                 </Text>
               </View>
               <TouchableOpacity

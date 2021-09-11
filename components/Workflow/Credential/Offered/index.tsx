@@ -72,22 +72,6 @@ function CredentialOffered(props: ICredentialOffered) {
                 <Image source={Images.infoGray} style={[AppStyles.info, { marginRight: 0, top: 10 }]} />
               </TouchableOpacity>
             </View>
-            <View style={AppStyles.tableItem}>
-              <View>
-                <Text style={[{ fontSize: 20, top: 8 }, AppStyles.textSecondary, AppStyles.textBold]}>
-                  {/*Temporary hardcoding*/}
-                  Driver's License
-                </Text>
-              </View>
-              <TouchableOpacity
-                onPress={() => {
-                  setViewInfo(props.credential)
-                  setViewCredential(true)
-                }}
-              >
-                <Image source={Images.infoGray} style={[AppStyles.info, { marginRight: 0, top: 10 }]} />
-              </TouchableOpacity>
-            </View>
             <View style={Styles.buttonWrap}>
               <Text
                 style={[

@@ -15,6 +15,11 @@ interface ICurrentCredential {
 
 function CurrentCredential(props) {
   const history = useHistory()
+  const key_list = []
+  
+  for(var key in props.credential.attributes){
+    key_list.push(key)
+  }
 
   return (
     <View style={AppStyles.viewOverlay}>
@@ -31,34 +36,18 @@ function CurrentCredential(props) {
             <View style={[AppStyles.tableItem, AppStyles.tableListItem, AppStyles.backgroundSecondary]}>
               <View>
                 <Text style={[{ fontSize: 20, top: 8 }, AppStyles.textWhite, AppStyles.textBold]}>
-                  Driver's License
+                {props.credential.attributes['name']}
                 </Text>
               </View>
             </View>
-            <View style={[AppStyles.tableItem, Styles.tableItem, Styles.tableSubItem]}>
-              <View>
+            {key_list.map((key_now, i) => (
+              <View key={i} style={[AppStyles.tableItem, Styles.tableItem, Styles.tableSubItem]}>
                 <Text style={[{ fontSize: 18 }, AppStyles.textBlack]}>
-                  <Text style={AppStyles.textBold}>Name: </Text>
-                  {props.credential.attributes.first_name} {props.credential.attributes.last_name}
+                    <Text style={AppStyles.textBold}>{key_now}: </Text>
+                    {props.credential.attributes[key_now]}
                 </Text>
               </View>
-            </View>
-            <View style={[AppStyles.tableItem, Styles.tableItem, Styles.tableSubItem]}>
-              <View>
-                <Text style={[{ fontSize: 18 }, AppStyles.textSecondary]}>
-                  <Text style={AppStyles.textBold}>Gender: </Text>
-                  {props.credential.attributes.gender}
-                </Text>
-              </View>
-            </View>
-            <View style={[AppStyles.tableItem, Styles.tableItem, Styles.tableSubItem]}>
-              <View>
-                <Text style={[{ fontSize: 18 }, AppStyles.textSecondary]}>
-                  <Text style={AppStyles.textBold}>Age: </Text>
-                  {props.credential.attributes.age}
-                </Text>
-              </View>
-            </View>
+            ))}
           </>
         ) : null}
       </View>
