@@ -55,11 +55,6 @@
     "react-test-renderer": "16.9.0",
     "typescript": "^4.2.2"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "jest": {
     "preset": "react-native",
     "moduleNameMapper": {
