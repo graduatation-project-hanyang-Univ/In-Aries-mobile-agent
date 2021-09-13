@@ -12,7 +12,7 @@ const images = {
   navContacts: require('./img/nav-contacts.png'),
   navCredentials: require('./img/nav-credentials.png'),
   navHome: require('./img/nav-home.png'),
-  navSettings: require('./img/nav-settings.png'),
+  navProfile: require('./img/nav-profiles.png'),
   receive: require('./img/receive.png'),
   send: require('./img/send.png'),
   waiting: require('./img/waiting.png'),

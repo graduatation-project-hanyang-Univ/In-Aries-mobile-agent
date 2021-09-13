@@ -4,7 +4,7 @@ let screenWidth = Dimensions.get('window').width
 
 const primaryColor = '#343f40'
 const secondaryColor = '#1b2624'
-const white = '#d9d2d0'
+const white = '#ffffff'
 const gray = '#a6a39f'
 const black = '#0d0d0d'
 
@@ -14,11 +14,11 @@ const Styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     height: '100%',
-    backgroundColor: '#eee',
+    backgroundColor: white,
   },
   viewFull: {
     height: '100%',
-    backgroundColor: '#eee',
+    backgroundColor: white,
   },
   viewOverlay: {
     height: '50%',
