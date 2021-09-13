@@ -20,6 +20,7 @@ import Settings from './components/Settings/index'
 import SetupWizard from './components/SetupWizard/index'
 import Terms from './components/Terms/index'
 import Workflow from './components/Workflow/index'
+import VPWorkflow from './components/Workflow/vp';
 
 const App = (props) => {
   let location = useLocation()
@@ -117,6 +118,12 @@ const App = (props) => {
                 path="/workflow"
                 render={() => (
                   <Workflow authenticated={authenticated} contacts={mockContacts} credentials={mockCredentials} />
+                )}
+              />
+              <Route
+                path="/vp-workflow"
+                render={() => (
+                  <VPWorkflow authenticated={authenticated} contacts={mockContacts} credentials={mockCredentials} />
                 )}
               />
               <Route exact path="/pin/enter" render={() => <PinEnter setAuthenticated={setAuthenticated} />} />

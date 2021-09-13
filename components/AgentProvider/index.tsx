@@ -36,7 +36,6 @@ function AgentProvider(props) {
         autoAcceptConnections: true,
         poolName: 'test-183',
         genesisPath,
-        logger: new ConsoleLogger(LogLevel.debug),
         indy,
       }
 

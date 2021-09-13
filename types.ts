@@ -13,3 +13,7 @@ export interface ICredential {
   last_name: string
   credential_date: string
 }
+
+export interface IProofRecord {
+  proofRequest: any
+}
