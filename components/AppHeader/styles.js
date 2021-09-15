@@ -6,7 +6,7 @@ const Styles = StyleSheet.create({
   header: {
     height: '20%',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
   },
   headerView: {
     flex: 1,

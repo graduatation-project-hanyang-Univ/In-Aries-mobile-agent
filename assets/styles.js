@@ -185,6 +185,10 @@ const Styles = StyleSheet.create({
     borderTopRightRadius: 50,
     height: '100%',
   },
+  ticketList: {
+    backgroundColor: white,
+    borderColor: gray,
+  }
 })
 
 export default Styles

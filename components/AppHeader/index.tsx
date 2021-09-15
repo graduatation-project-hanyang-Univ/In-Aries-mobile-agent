@@ -25,7 +25,6 @@ function AppHeader(props: AppHeaderProps) {
         <View style={Styles.headerView}>
           {props.headerText ? (
             <>
-              <Image source={Images.logo} style={{ marginRight: 10 }} />
               <Text style={[AppStyles.h1, AppStyles.textSecondary, Styles.textBorder, AppStyles.textUpper]}>
                 {props.headerText}
               </Text>

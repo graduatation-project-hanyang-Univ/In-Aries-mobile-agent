@@ -23,7 +23,11 @@ function Navbar(props: INavbar) {
           </Link>
           <Link style={Styles.navButton} component={TouchableOpacity} to="/workflow/connect">
             <Image source={Images.navConnect} style={{ width: 28, height: 28}} />
-            <Text style={Styles.textSmall}>ScanQR</Text>
+            <Text style={Styles.textSmall}>Ticketing</Text>
+          </Link>
+          <Link style={Styles.navButton} component={TouchableOpacity} to="/vp-workflow/connect">
+            <Image source={Images.navVpFlow} style={{ width: 40, height: 28}} />
+            <Text style={Styles.textSmall}>Entering</Text>
           </Link>
           <Link style={Styles.navButton} component={TouchableOpacity} to="/credentials">
             <Image source={Images.navCredentials} style={{ width: 32, height: 28 }} />
@@ -32,10 +36,6 @@ function Navbar(props: INavbar) {
           <Link style={Styles.navButton} component={TouchableOpacity} to="/contacts">
             <Image source={Images.navContacts} style={{ width: 28, height: 28 }} />
             <Text style={Styles.textSmall}>Contacts</Text>
-          </Link>
-          <Link style={Styles.navButton} component={TouchableOpacity} to="/settings">
-            <Image source={Images.navProfile} style={{ width: 28, height: 28 }} />
-            <Text style={Styles.textSmall}>profile</Text>
           </Link>
         </View>
       ) : null}
