@@ -21,7 +21,7 @@ const Styles = StyleSheet.create({
     backgroundColor: white,
   },
   viewOverlay: {
-    height: '50%',
+    height: '75%',
     width: '100%',
     position: 'absolute',
     bottom: 0,
@@ -159,6 +159,12 @@ const Styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  tableItemScroll:{
+    borderBottomWidth: 1.2,
+    borderColor: '#0A1C40',
+    height: 80,
+    width: '115%',
+  },
   arrow: {
     height: 26,
     width: 48,
@@ -167,7 +173,8 @@ const Styles = StyleSheet.create({
     transform: [{ rotate: '90deg' }],
   },
   backbutton: {
-    marginBottom: 30,
+    marginBottom: 15,
+    alignSelf: 'flex-end',
   },
   tableListItem: {
     paddingLeft: 30,
@@ -181,14 +188,15 @@ const Styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#ddd',
     padding: 12,
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
+    borderTopColor: black,
     height: '100%',
   },
   ticketList: {
+    width: Dimensions.get('screen').width * 0.90,
     backgroundColor: white,
-    borderColor: gray,
-  }
+    borderColor: black,
+    borderRadius: 5,
+  },
 })
 
 export default Styles

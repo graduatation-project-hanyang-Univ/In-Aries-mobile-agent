@@ -25,7 +25,7 @@ function AppHeader(props: AppHeaderProps) {
         <View style={Styles.headerView}>
           {props.headerText ? (
             <>
-              <Text style={[AppStyles.h1, AppStyles.textSecondary, Styles.textBorder, AppStyles.textUpper]}>
+              <Text style={[AppStyles.h1, AppStyles.textSecondary, Styles.textBorder]}>
                 {props.headerText}
               </Text>
             </>
