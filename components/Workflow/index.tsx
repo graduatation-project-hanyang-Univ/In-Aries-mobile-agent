@@ -106,15 +106,7 @@ function Workflow(props: IWorkflow) {
         path={`${url}/connecting`}
         render={() => {
           return (
-            <Message title={'Connecting'} bgColor={'#1B2624'} textLight={true}>
-              <Image
-                source={Images.waiting}
-                style={{
-                  alignSelf: 'center',
-                  width: 102,
-                  height: 115,
-                }}
-              />
+            <Message title={'Connecting...'} bgColor={'#FFFFFF'} textLight={true}>
             </Message>
           )
         }}
@@ -127,15 +119,7 @@ function Workflow(props: IWorkflow) {
         path={`${url}/pending`}
         render={() => {
           return (
-            <Message title={'Pending Issuance'} bgColor={'#1B2624'} textLight={true}>
-              <Image
-                source={Images.waiting}
-                style={{
-                  alignSelf: 'center',
-                  width: 102,
-                  height: 115,
-                }}
-              />
+            <Message title={'Pending Issuance...'} bgColor={'#FFFFFF'} textLight={true}>
             </Message>
           )
         }}
@@ -144,15 +128,7 @@ function Workflow(props: IWorkflow) {
         path={`${url}/issued`}
         render={() => {
           return (
-            <Message title={'Credential Issued'} path={'/home'} bgColor={'#1B2624'} textLight={true}>
-              <Image
-                source={Images.whiteHexCheck}
-                style={{
-                  alignSelf: 'center',
-                  width: 102,
-                  height: 115,
-                }}
-              />
+            <Message title={'Credential Issued!'} path={'/home'} bgColor={'#FFFFFF'} textLight={true}>
             </Message>
           )
         }}

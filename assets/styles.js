@@ -91,8 +91,15 @@ const Styles = StyleSheet.create({
   backgroundBlack: {
     backgroundColor: black,
   },
+  backgroundButton: {
+    backgroundColor: '#24a0ed',
+  },
   header: {
     height: '28%',
+    justifyContent: 'center',
+  },
+  smallHeader:{
+    height: '23%',
     justifyContent: 'center',
   },
   tab: {
@@ -123,9 +130,9 @@ const Styles = StyleSheet.create({
   button: {
     marginVertical: 7,
     minWidth: 150,
-    paddingVertical: 10,
+    paddingVertical: 8,
     paddingHorizontal: 20,
-    borderRadius: 30,
+    borderRadius: 10,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { height: 2, width: 2 },
@@ -152,7 +159,7 @@ const Styles = StyleSheet.create({
   tableItem: {
     borderBottomWidth: 1.2,
     borderColor: '#0A1C40',
-    height: 80,
+    height: 70,
     width: '115%',
     padding: 16,
     display: 'flex',
@@ -197,6 +204,12 @@ const Styles = StyleSheet.create({
     borderColor: black,
     borderRadius: 5,
   },
+  headerLeft:{
+    alignSelf: 'flex-start',
+    marginStart: 10,
+    fontSize: 20,
+    textAlign: 'center',
+  }
 })
 
 export default Styles
