@@ -82,15 +82,7 @@ function VPWorkflow(props: IWorkflow) {
                 path={`${url}/connecting`}
                 render={() => {
                     return (
-                        <Message title={'Connecting'} bgColor={'#1B2624'} textLight={true}>
-                            <Image
-                                source={Images.waiting}
-                                style={{
-                                    alignSelf: 'center',
-                                    width: 102,
-                                    height: 115,
-                                }}
-                            />
+                        <Message title={'Connecting...'} bgColor={'#FFFFFF'} textLight={true}>
                         </Message>
                     )
                 }}
@@ -103,15 +95,7 @@ function VPWorkflow(props: IWorkflow) {
                 path={`${url}/pending`}
                 render={() => {
                     return (
-                        <Message title={'Pending Issuance'} bgColor={'#1B2624'} textLight={true}>
-                            <Image
-                                source={Images.waiting}
-                                style={{
-                                    alignSelf: 'center',
-                                    width: 102,
-                                    height: 115,
-                                }}
-                            />
+                        <Message title={'Pending Issuance...'} bgColor={'#FFFFFF'} textLight={true}>
                         </Message>
                     )
                 }}
@@ -120,15 +104,7 @@ function VPWorkflow(props: IWorkflow) {
                 path={`${url}/verified`}
                 render={() => {
                     return (
-                        <Message title={'Verified'} path={'/home'} bgColor={'#1B2624'} textLight={true}>
-                            <Image
-                                source={Images.whiteHexCheck}
-                                style={{
-                                    alignSelf: 'center',
-                                    width: 102,
-                                    height: 115,
-                                }}
-                            />
+                        <Message title={'Verified'} path={'/home'} bgColor={'#FFFFFF'} textLight={true}>
                         </Message>
                     )
                 }}

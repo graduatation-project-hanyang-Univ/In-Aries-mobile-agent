@@ -62,6 +62,14 @@ const Styles = StyleSheet.create({
     width: 30,
     height: 43,
   },
+  checkboxContainer: {
+    flexDirection: "row",
+    marginBottom: 10,
+  },
+  checkbox: {
+    alignSelf: "center",
+    marginLeft: 10,
+  },
 })
 
 export default Styles
