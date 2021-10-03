@@ -1,15 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 
-import { Image, View } from 'react-native'
+import { View } from 'react-native'
 
 import { Route, useHistory, useRouteMatch } from 'react-router-native'
 
-import Images from '../../assets/images'
-
 import AgentContext from '../AgentProvider/'
-import {CredentialEventType, ProofEventType, ProofState} from 'aries-framework'
+import {ProofEventType, ProofState} from 'aries-framework'
 
-import CredentialOffered from './Credential/Offered/index'
 import QRCodeScanner from './QRCodeScanner/index'
 import Message from '../Message/index'
 import { IContact, ICredential } from '../../types'

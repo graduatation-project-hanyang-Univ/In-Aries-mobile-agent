@@ -18,6 +18,7 @@ const images = {
   send: require('./img/send.png'),
   waiting: require('./img/waiting.png'),
   whiteHexCheck: require('./img/credential-large.png'),
+  link: require('./img/link.png'),
 }
 
 export default images

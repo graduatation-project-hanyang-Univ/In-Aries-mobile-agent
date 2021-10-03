@@ -99,7 +99,7 @@ const Styles = StyleSheet.create({
     justifyContent: 'center',
   },
   smallHeader:{
-    height: '23%',
+    height: '21%',
     justifyContent: 'center',
   },
   tab: {
@@ -159,7 +159,7 @@ const Styles = StyleSheet.create({
   tableItem: {
     borderBottomWidth: 1.2,
     borderColor: '#0A1C40',
-    height: 70,
+    height: 68,
     width: '115%',
     padding: 16,
     display: 'flex',
@@ -169,7 +169,7 @@ const Styles = StyleSheet.create({
   tableItemScroll:{
     borderBottomWidth: 1.2,
     borderColor: '#0A1C40',
-    height: 80,
+    height: 70,
     width: '115%',
   },
   arrow: {
@@ -209,6 +209,14 @@ const Styles = StyleSheet.create({
     marginStart: 10,
     fontSize: 20,
     textAlign: 'center',
+  },
+  headerCenter:{
+    alignSelf: 'center',
+    fontSize: 38,
+    textAlign: 'center',
+    backgroundColor: '#0b0b0b',
+    width: Dimensions.get('screen').width,
+
   }
 })
 
