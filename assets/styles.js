@@ -4,7 +4,7 @@ let screenWidth = Dimensions.get('window').width
 
 const primaryColor = '#343f40'
 const secondaryColor = '#1b2624'
-const white = '#d9d2d0'
+const white = '#ffffff'
 const gray = '#a6a39f'
 const black = '#0d0d0d'
 
@@ -14,14 +14,14 @@ const Styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     height: '100%',
-    backgroundColor: '#eee',
+    backgroundColor: white,
   },
   viewFull: {
     height: '100%',
-    backgroundColor: '#eee',
+    backgroundColor: white,
   },
   viewOverlay: {
-    height: '50%',
+    height: '75%',
     width: '100%',
     position: 'absolute',
     bottom: 0,
@@ -91,8 +91,15 @@ const Styles = StyleSheet.create({
   backgroundBlack: {
     backgroundColor: black,
   },
+  backgroundButton: {
+    backgroundColor: '#24a0ed',
+  },
   header: {
     height: '28%',
+    justifyContent: 'center',
+  },
+  smallHeader:{
+    height: '21%',
     justifyContent: 'center',
   },
   tab: {
@@ -123,9 +130,9 @@ const Styles = StyleSheet.create({
   button: {
     marginVertical: 7,
     minWidth: 150,
-    paddingVertical: 10,
+    paddingVertical: 8,
     paddingHorizontal: 20,
-    borderRadius: 30,
+    borderRadius: 10,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { height: 2, width: 2 },
@@ -152,12 +159,18 @@ const Styles = StyleSheet.create({
   tableItem: {
     borderBottomWidth: 1.2,
     borderColor: '#0A1C40',
-    height: 80,
+    height: 68,
     width: '115%',
     padding: 16,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  tableItemScroll:{
+    borderBottomWidth: 1.2,
+    borderColor: '#0A1C40',
+    height: 70,
+    width: '115%',
   },
   arrow: {
     height: 26,
@@ -167,7 +180,8 @@ const Styles = StyleSheet.create({
     transform: [{ rotate: '90deg' }],
   },
   backbutton: {
-    marginBottom: 30,
+    marginBottom: 15,
+    alignSelf: 'flex-end',
   },
   tableListItem: {
     paddingLeft: 30,
@@ -181,10 +195,29 @@ const Styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#ddd',
     padding: 12,
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
+    borderTopColor: black,
     height: '100%',
   },
+  ticketList: {
+    width: Dimensions.get('screen').width * 0.90,
+    backgroundColor: white,
+    borderColor: black,
+    borderRadius: 5,
+  },
+  headerLeft:{
+    alignSelf: 'flex-start',
+    marginStart: 10,
+    fontSize: 20,
+    textAlign: 'center',
+  },
+  headerCenter:{
+    alignSelf: 'center',
+    fontSize: 38,
+    textAlign: 'center',
+    backgroundColor: '#0b0b0b',
+    width: Dimensions.get('screen').width,
+
+  }
 })
 
 export default Styles

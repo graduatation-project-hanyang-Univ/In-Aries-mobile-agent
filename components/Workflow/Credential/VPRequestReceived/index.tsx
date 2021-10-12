@@ -1,22 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { toByteArray } from 'base64-js'
 
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View, ScrollView, CheckBox, Alert} from 'react-native'
 
 import { useHistory } from 'react-router-native'
 
-import AppHeader from '../../../AppHeader/index'
 import BackButton from '../../../BackButton/index'
-import CurrentContact from '../../../CurrentContact/index'
-import CurrentCredential from '../../../CurrentCredential/index'
-
 import AgentContext from '../../../AgentProvider/'
-
-import Images from '../../../../assets/images'
 import Styles from '../styles'
 import AppStyles from '../../../../assets/styles'
 import {IContact, IProofRecord} from '../../../../types'
-import {toArray} from "react-native-svg/lib/typescript/lib/Matrix2D";
+
 
 interface IVPRequestReceived {
     setWorkflow: any
@@ -27,14 +21,10 @@ interface IVPRequestReceived {
 function VPRequestReceived(props: IVPRequestReceived) {
     const history = useHistory()
     const [retrievedCredentials, setRetrievedCredentials] = useState<any>()
-    const [retrievedCredentialsDisplay, setRetrievedCredentialsDisplay] = useState<any>()
-
-    const [viewInfo, setViewInfo] = useState('')
-    const [viewContact, setViewContact] = useState(false)
-    const [viewCredential, setViewCredential] = useState(false)
 
     //Reference to the agent context
     const agentContext = useContext(AgentContext)
+      
 
     const getRetrievedCredentials = async () => {
         const temp = await agentContext.agent.proofs.getById(props.proofRecord.id);
@@ -49,15 +39,12 @@ function VPRequestReceived(props: IVPRequestReceived) {
           props.proofRecord.requestMessage.indyProofRequest,
           undefined
         )
-        console.log('retrievedCreds: ', retrievedCreds)
-
         setRetrievedCredentials(retrievedCreds)
     }
 
     useEffect(() => {
         getRetrievedCredentials()
     }, [])
-
 
     const acceptProofRequest = async () => {
         console.log('Attempting to accept proof request')
@@ -66,32 +53,92 @@ function VPRequestReceived(props: IVPRequestReceived) {
         history.push('/vp-workflow/pending')
     }
 
+    const goAlert = async () => {
+        Alert.alert(
+            "Deny",
+            "모든 체크박스에 체크해주세요",
+            [ { text: "OK" }],
+            { cancelable: false }
+        )
+    }
+
+    const attribute_key_list = []
+    const request_key_list = []
+    const [isSelected, setSelection] = useState(false)
+    const [isPredictionSelected, setPredictionSelection] = useState(false)
+
+
+    for(var key in props.proofRecord.requestMessage.indyProofRequest.requestedAttributes){
+        attribute_key_list.push(key)
+    }
+    for(var key in props.proofRecord.requestMessage.indyProofRequest.requestedPredicates){
+        request_key_list.push(key)
+    }
+
     return (
         <>
             <BackButton backPath={'/workflow/connect'} />
-            <>
-                <View style={Styles.buttonWrap}>
-                    <Text
-                        style={[
-                            { fontSize: 18 },
-                            AppStyles.textSecondary,
-                            AppStyles.textUpper,
-                            Styles.buttonText,
-                            AppStyles.textBold,
-                        ]}
-                    >
-                        Claim Credentials
+            <View style={AppStyles.viewFull}>
+                <View style={AppStyles.smallHeader}>
+                    <Text style={[AppStyles.textSecondary, AppStyles.textBold,  AppStyles.headerLeft]}>
+                    Request List:
                     </Text>
-                    <TouchableOpacity
-                        style={[Styles.button, AppStyles.backgroundPrimary]}
-                        onPress={() => {
-                            acceptProofRequest()
-                        }}
-                    >
-                        <Image source={Images.receive} style={Styles.buttonIcon} />
-                    </TouchableOpacity>
                 </View>
-            </>
+                <ScrollView >
+                    {attribute_key_list.map((key_now, i) => (
+                    <View key={i} style={[AppStyles.tableItem, Styles.tableItem, Styles.tableSubItem]}>
+                        <View style={Styles.checkboxContainer}>
+                            <Text style={[{ fontSize: 15 }, AppStyles.textBlack]}>
+                                {props.proofRecord.requestMessage.indyProofRequest.requestedAttributes[key_now].name}
+                            </Text>
+                            <CheckBox
+                                value={isSelected}
+                                onValueChange={setSelection}
+                                style={Styles.checkbox}
+                            />
+                        </View>
+                    </View>
+                    ))}
+                    {request_key_list.map((key_now, i) => (
+                    <View key={i} style={[AppStyles.tableItem, Styles.tableItem, Styles.tableSubItem]}>
+                        <View style={Styles.checkboxContainer}>
+                            <Text style={[{ fontSize: 15 }, AppStyles.textBlack]}>
+                                {props.proofRecord.requestMessage.indyProofRequest.requestedPredicates[key_now].name}
+                            </Text>
+                            <CheckBox
+                                value={isPredictionSelected}
+                                onValueChange={setPredictionSelection}
+                                style={Styles.checkbox}
+                            />
+                        </View>
+                    </View>
+                    ))}
+                </ScrollView>
+                <View style={{flexDirection: "row"}}>
+                    <View style={{flex: 1}}>
+                        <TouchableOpacity
+                            onPress={() => {
+                            history.push('/home')
+                            }}
+                        >
+                            <View style={Styles.buttonDeny}>
+                                <Text style={[AppStyles.textBlack,{fontSize: 17}]}>Deny</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{flex: 1}}>
+                        <TouchableOpacity
+                            onPress={() => {
+                                {isSelected && isPredictionSelected ? acceptProofRequest() : goAlert()}
+                            }}
+                        >
+                            <View style={Styles.buttonAccept}> 
+                                <Text style={[AppStyles.textWhite,{fontSize: 17}]}>Accept</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </View>
         </>
     )
 }

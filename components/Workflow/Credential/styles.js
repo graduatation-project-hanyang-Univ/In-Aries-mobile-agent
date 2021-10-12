@@ -19,6 +19,8 @@ const Styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 20,
     alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    borderColor: '#0d0d0d',
   },
   buttonText: {
     maxWidth: 120,
@@ -34,9 +36,39 @@ const Styles = StyleSheet.create({
     left: -10,
     top: 40,
   },
+  buttonAccept: {
+    backgroundColor: '#24a0ed',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    bottom: 30,
+    right: '35%',
+    width: '130%',
+    height: 45,
+  },
+  buttonDeny: {
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#0d0d0d',
+    bottom: 30,
+    left: '5%',
+    width: '55%',
+    height: 45,
+  },
   buttonIcon: {
     width: 30,
     height: 43,
+  },
+  checkboxContainer: {
+    flexDirection: "row",
+    marginBottom: 10,
+  },
+  checkbox: {
+    alignSelf: "center",
+    marginLeft: 10,
   },
 })
 

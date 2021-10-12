@@ -28,7 +28,7 @@ const App = (props) => {
 
   const [currentLocation, setCurrentLocation] = useState('')
 
-  const [authenticated, setAuthenticated] = useState(false)
+  const [authenticated, setAuthenticated] = useState(true)
 
   // Mock data to pass to Terms component
   const mockTitle = 'Terms of Service'
@@ -126,16 +126,11 @@ const App = (props) => {
                   <VPWorkflow authenticated={authenticated} contacts={mockContacts} credentials={mockCredentials} />
                 )}
               />
-              <Route exact path="/pin/enter" render={() => <PinEnter setAuthenticated={setAuthenticated} />} />
-              <Route exact path="/pin/create" render={() => <PinCreate setAuthenticated={setAuthenticated} />} />
               <Route
                 exact
                 path="/setup-wizard"
                 render={() => (
                   <SetupWizard setAuthenticated={setAuthenticated}>
-                    <Terms title={mockTitle} message={mockMessage} />
-                    <Terms title={mockEulaTitle} message={mockEulaMessage} />
-                    <PinCreate />
                   </SetupWizard>
                 )}
               />

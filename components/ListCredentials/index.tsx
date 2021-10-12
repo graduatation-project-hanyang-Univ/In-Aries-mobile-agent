@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react'
 
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { Image, Text, TouchableOpacity, View, ScrollView, TouchableHighlight } from 'react-native'
 
 import { useHistory } from 'react-router-native'
 
 import AppHeader from '../AppHeader/index'
 import BackButton from '../BackButton/index'
 import CurrentCredential from '../CurrentCredential/index'
+// import NoTicketPage from '../NoTicketPage/index'
 
 import AgentContext from '../AgentProvider/'
 import { CredentialEventType } from 'aries-framework'
 
 import AppStyles from '../../assets/styles'
-import Images from '../../assets/images'
 import Styles from './styles'
 
 interface IListCredentials {}
@@ -78,34 +78,26 @@ function ListCredentials(props: IListCredentials) {
       <BackButton backPath={'/home'} />
       <View style={AppStyles.viewFull}>
         <View style={AppStyles.header}>
-          <AppHeader headerText={'CREDENTIALS'} />
+          <AppHeader headerText={'Tickets'} />
         </View>
-        <View style={[Styles.credView, AppStyles.backgroundSecondary]}>
-          <TouchableOpacity
-            style={Styles.backbutton}
-            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-            onPress={() => history.push('/home')}
-          >
-            <Image source={Images.arrowDown} style={AppStyles.arrow} />
-          </TouchableOpacity>
-          {credentials.map((credential, i) => (
-            <View key={i} style={[AppStyles.tableItem, Styles.tableItem, AppStyles.backgroundSecondary]}>
-              <View>
-                <Text style={[{ fontSize: 18, top: 8 }, AppStyles.textWhite, AppStyles.textBold]}>
-                  {credential.attributes.name}
-                </Text>
+        <ScrollView>
+          <View style={[Styles.credView, AppStyles.backgroundWhite]}>
+            {credentials.map((credential, i) => (
+              <TouchableHighlight onPress={() => {
+                setViewInfo(credential)
+                setViewCredential(true)
+              }}>
+              <View key={i} style={[AppStyles.tableItem, Styles.tableItem, AppStyles.ticketList]}>
+                <View>
+                  <Text style={[{ fontSize: 18}, AppStyles.textBlack, AppStyles.textBold]}>
+                    {credential.attributes.name}
+                  </Text>
+                </View>
               </View>
-              <TouchableOpacity
-                onPress={() => {
-                  setViewInfo(credential)
-                  setViewCredential(true)
-                }}
-              >
-                <Image source={Images.infoWhite} style={[AppStyles.info, { marginRight: 10, top: 10 }]} />
-              </TouchableOpacity>
-            </View>
-          ))}
-        </View>
+              </TouchableHighlight>
+            ))}
+          </View>
+        </ScrollView>
       </View>
       {viewCredential ? <CurrentCredential credential={viewInfo} setViewCredential={setViewCredential} /> : null}
     </>
