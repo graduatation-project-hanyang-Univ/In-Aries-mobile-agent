@@ -33,9 +33,9 @@ function Navbar(props: INavbar) {
             <Image source={Images.navCredentials} style={{ width: 32, height: 28 }} />
             <Text style={Styles.textSmall}>Tickets</Text>
           </Link>
-          <Link style={Styles.navButton} component={TouchableOpacity} to="/contacts">
-            <Image source={Images.navContacts} style={{ width: 28, height: 28 }} />
-            <Text style={Styles.textSmall}>Contacts</Text>
+          <Link style={Styles.navButton} component={TouchableOpacity} to="/settings">
+            <Image source={Images.navInfo} style={{ width: 28, height: 28 }} />
+            <Text style={Styles.textSmall}>Information</Text>
           </Link>
         </View>
       ) : null}

@@ -14,6 +14,7 @@ const images = {
   navHome: require('./img/nav-home.png'),
   navVpFlow: require('./img/nav-vpflow.png'),
   navProfile: require('./img/nav-profiles.png'),
+  navInfo: require('./img/nav-info.png'),
   receive: require('./img/receive.png'),
   send: require('./img/send.png'),
   waiting: require('./img/waiting.png'),
