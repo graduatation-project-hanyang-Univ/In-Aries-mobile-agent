@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { Image, Text, TouchableOpacity, View, ScrollView } from 'react-native'
 
 import { useHistory } from 'react-router-native'
 
@@ -15,6 +15,7 @@ import Images from '../../../../assets/images'
 import Styles from '../styles'
 import AppStyles from '../../../../assets/styles'
 import { IContact, ICredential } from '../../../../types'
+import styles from '../../../CurrentContact/styles'
 
 interface ICredentialOffered {
   contact: IContact
@@ -44,64 +45,73 @@ function CredentialOffered(props: ICredentialOffered) {
     history.push('/workflow/pending')
   }
 
+  const key_list = []
+  
+  for(var key in props.credential.attributes){
+    key_list.push(key)
+  }
+
   return (
     <>
       <BackButton backPath={'/workflow/connect'} />
       <>
         <View style={AppStyles.viewFull}>
-          <View style={AppStyles.header}>
-            <AppHeader headerText={'CREDENTIALS'} />
-          </View>
-          <View style={[AppStyles.tab, Styles.tabView]}>
-            <Text style={[AppStyles.h3, AppStyles.textSecondary, AppStyles.textUpper, AppStyles.textBold]}>
-              Credential from:
+          <View style={AppStyles.smallHeader}>
+            <Text style={[AppStyles.textSecondary, AppStyles.textBold,  AppStyles.headerLeft]}>
+              Credential From:
             </Text>
-            <View style={AppStyles.tableItem}>
-              <View>
-                <Text style={[{ fontSize: 20, top: 8 }, AppStyles.textBlack, AppStyles.textBold]}>
-                  {props.contact.alias ? props.contact.alias : props.contact.invitation.label}
-                </Text>
-                <Text style={[{ fontSize: 14 }, AppStyles.textSecondary]}>{props.contact.sublabel}</Text>
-              </View>
-              <TouchableOpacity
-                onPress={() => {
-                  setViewInfo(props.contact)
-                  setViewContact(true)
-                }}
-              >
-                <Image source={Images.infoGray} style={[AppStyles.info, { marginRight: 0, top: 10 }]} />
-              </TouchableOpacity>
-            </View>
-            <View style={Styles.buttonWrap}>
-              <Text
-                style={[
-                  { fontSize: 18 },
-                  AppStyles.textSecondary,
-                  AppStyles.textUpper,
-                  Styles.buttonText,
-                  AppStyles.textBold,
-                ]}
-              >
-                Claim Credentials
-              </Text>
-              <TouchableOpacity
-                style={[Styles.button, AppStyles.backgroundPrimary]}
-                onPress={() => {
-                  acceptOffer()
-                }}
-              >
-                <Image source={Images.receive} style={Styles.buttonIcon} />
-              </TouchableOpacity>
-            </View>
-            <TouchableOpacity
-              style={{ top: 60 }}
-              onPress={() => {
-                history.push('/home')
-              }}
-            >
-              <Text style={[{ fontSize: 14 }, AppStyles.textGray, AppStyles.textCenter]}>Decline{'\n'}Offer</Text>
-            </TouchableOpacity>
           </View>
+          <ScrollView >
+            <View style={AppStyles.tableItem}>
+              <TouchableOpacity
+                  onPress={() => {
+                    setViewInfo(props.contact)
+                    setViewContact(true)
+                  }}
+                >
+                <View>
+                  <Text style={[{ fontSize: 18, top: 15 }, AppStyles.textBlack, AppStyles.textBold]}>
+                    {props.contact.alias ? props.contact.alias : props.contact.invitation.label}
+                  </Text>
+                  <Text style={[{ fontSize: 14 }, AppStyles.textSecondary]}>{props.contact.sublabel}</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+            <View>
+                {key_list.map((key_now, i) => (
+                  <View key={i} style={[AppStyles.tableItem, Styles.tableItem, Styles.tableSubItem]}>
+                    <Text style={[{ fontSize: 15 }, AppStyles.textBlack]}>
+                        <Text style={AppStyles.textBold}>{key_now}: </Text>
+                        {props.credential.attributes[key_now]}
+                    </Text>
+                  </View>
+                ))}
+            </View>
+            </ScrollView>
+            <View style={{flexDirection: "row"}}>
+              <View style={{flex: 1}}>
+                <TouchableOpacity
+                  onPress={() => {
+                    history.push('/home')
+                  }}
+                >
+                  <View style={Styles.buttonDeny}>
+                    <Text style={[AppStyles.textBlack,{fontSize: 17}]}>Deny</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+              <View style={{flex: 1}}>
+                <TouchableOpacity
+                  onPress={() => {
+                    acceptOffer()
+                  }}
+                >
+                  <View style={Styles.buttonAccept}> 
+                    <Text style={[AppStyles.textWhite,{fontSize: 17}]}>Accept</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </View>
         </View>
         {viewCredential ? <CurrentCredential credential={viewInfo} setViewCredential={setViewCredential} /> : null}
         {viewContact ? <CurrentContact contact={viewInfo} setViewContact={setViewContact} /> : null}

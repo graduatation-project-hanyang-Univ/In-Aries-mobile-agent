@@ -12,11 +12,14 @@ const images = {
   navContacts: require('./img/nav-contacts.png'),
   navCredentials: require('./img/nav-credentials.png'),
   navHome: require('./img/nav-home.png'),
-  navSettings: require('./img/nav-settings.png'),
+  navVpFlow: require('./img/nav-vpflow.png'),
+  navProfile: require('./img/nav-profiles.png'),
+  navInfo: require('./img/nav-info.png'),
   receive: require('./img/receive.png'),
   send: require('./img/send.png'),
   waiting: require('./img/waiting.png'),
   whiteHexCheck: require('./img/credential-large.png'),
+  link: require('./img/link.png'),
 }
 
 export default images

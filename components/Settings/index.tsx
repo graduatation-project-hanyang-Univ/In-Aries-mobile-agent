@@ -21,22 +21,19 @@ function Settings() {
       <BackButton backPath={'/home'} />
       <View style={AppStyles.viewFull}>
         <View style={AppStyles.header}>
-          <AppHeader headerText={'SETTINGS'} />
+          <AppHeader headerText={'Information'} />
         </View>
         <View style={Styles.settingView}>
-          <TouchableOpacity
-            style={Styles.backbutton}
-            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-            onPress={() => history.push('/home')}
-          >
-            <Image source={Images.arrowDown} style={AppStyles.arrow} />
-          </TouchableOpacity>
-          <Text style={[AppStyles.textSecondary, AppStyles.h3]}>
-            <Text style={AppStyles.textBold}>Version: </Text> 0.0.1
-          </Text>
-          <Text style={[AppStyles.textSecondary, AppStyles.h3]}>
-            <Text style={AppStyles.textBold}>AMA-RN Version: </Text> 0.1.0
-          </Text>
+
+          <Text style={[AppStyles.h3, AppStyles.textBold]}>Version:</Text> 
+          <Text style={{fontSize: 17}}>1.0{'\n'}</Text>
+
+          <Text style={[AppStyles.h3, AppStyles.textBold]}>Valid blockchain:</Text>
+          <Text style={{fontSize: 17}}>sovrin, ethereum{'\n'}</Text>
+
+          <Text style={[AppStyles.h3, AppStyles.textBold]}>Connect us:</Text>
+          <Text style={{fontSize: 17}}>ckk615@naver.com</Text>
+          <Text style={{fontSize: 17}}>xodyd15@naver.com</Text>
         </View>
       </View>
     </>

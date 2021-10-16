@@ -7,11 +7,11 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   tableItem: {
-    paddingLeft: 30,
+    paddingLeft: 15,
     display: 'flex',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderColor: '#fff',
+    borderColor: '#0d0d0d',
   },
   tableSubItem: {
     height: 50,
@@ -19,8 +19,6 @@ const styles = StyleSheet.create({
   credView: {
     alignItems: 'center',
     padding: 12,
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
     height: '100%',
   },
 })
