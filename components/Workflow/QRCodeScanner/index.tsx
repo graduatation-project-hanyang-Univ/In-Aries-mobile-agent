@@ -15,6 +15,7 @@ import AgentContext from '../../AgentProvider/'
 
 import Styles from './styles'
 import AppStyles from '../../../assets/styles'
+import {isVeramoVC, saveVeramoVC, verifyVeramoVP} from "../../Veramo";
 
 //  TODO - Add props interface
 function QRCodeScanner(props) {
@@ -36,18 +37,38 @@ function QRCodeScanner(props) {
       //Turn off camera so that we don't scan again
       setCameraActive(false)
 
-      const decodedInvitation = await decodeInvitationFromUrl(barcode.data)
+      // indy쪽 QR Code
+      if(barcode.data.startsWith('http')) {
+        console.info('indy qr code data')
+        const decodedInvitation = await decodeInvitationFromUrl(barcode.data)
 
-      console.log('New Invitation:', decodedInvitation)
+        console.log('New Invitation:', decodedInvitation)
 
-      const connectionRecord = await agentContext.agent.connections.receiveInvitation(decodedInvitation, {
-        autoAcceptConnection: true,
-      })
+        const connectionRecord = await agentContext.agent.connections.receiveInvitation(decodedInvitation, {
+          autoAcceptConnection: true,
+        })
 
-      console.log('New Connection Record', connectionRecord)
+        console.log('New Connection Record', connectionRecord)
+        props.setWorkflow('connecting')
+        return;
+      }
 
-      props.setWorkflow('connecting')
-    })
+      // veramo쪽 QR Code
+      const jwt = barcode.data;
+
+      if(await isVeramoVC(jwt)) {
+        console.info('veramo VC qr code data')
+        await saveVeramoVC(jwt);
+        props.setWorkflow('issued');
+        return;
+      } else {
+        console.info('veramo VP qr code data')
+        const verified = await verifyVeramoVP(jwt)
+        // TODO 실패 시 핸들링
+        props.setWorkflow('verified');
+        return;
+      }
+    });
   }
 
   if (cameraActive) {
