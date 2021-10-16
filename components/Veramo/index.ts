@@ -25,6 +25,8 @@ async function isVeramoVC(jwt: string): Promise<boolean> {
 }
 
 async function saveVeramoVC(jwt: string): Promise<void> {
+  await getOrCreateVeramoDid();
+
   const decoded = await VeramoAgent.handleMessage({
     raw: jwt,
   });

@@ -56,11 +56,13 @@ const INFURA_PROJECT_ID = '2b64268fa545491f90167f46698876db'
 
 const secretKey = '29739248cad1bd1a0fc4d9b75cd4d2990de535baf5caadfdf8d8f86664aa830c'
 
+
+
 const dbConnection = createConnection({
   type: 'react-native',
   database: 'veramo.sqlite',
   location: 'default',
-  synchronize: false,
+  synchronize: true,
   logging: ['error', 'info', 'warn'],
   entities: Entities,
 });
