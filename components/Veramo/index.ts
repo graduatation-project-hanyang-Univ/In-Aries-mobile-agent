@@ -1,5 +1,5 @@
 import { VeramoAgent } from "./agent";
-import {IIdentifier} from "@veramo/core";
+import {IIdentifier, IMessage} from "@veramo/core";
 import {UniqueVerifiableCredential} from "@veramo/data-store/src/data-store-orm";
 
 async function getOrCreateVeramoDid() {
@@ -25,13 +25,20 @@ async function isVeramoVC(jwt: string): Promise<boolean> {
   return false;
 }
 
+async function decodeVeramoVC(jwt: string): Promise<IMessage> {
+
+  const decoded = await VeramoAgent.handleMessage({
+    raw: jwt,
+  });
+  return decoded;
+}
+
 async function saveVeramoVC(jwt: string): Promise<void> {
   await getOrCreateVeramoDid();
 
   const decoded = await VeramoAgent.handleMessage({
     raw: jwt,
   });
-
 
   for(const credential of decoded.credentials) {
     console.info('veramo VC :', JSON.stringify(credential, null, 2))
@@ -120,4 +127,5 @@ export {
   verifyVeramoVP,
   isVeramoVC,
   getAllVeramoVCs,
+  decodeVeramoVC,
 }

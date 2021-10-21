@@ -204,6 +204,20 @@ const Styles = StyleSheet.create({
     borderColor: black,
     borderRadius: 5,
   },
+  ticketListIndy: {
+    width: Dimensions.get('screen').width * 0.90,
+    backgroundColor: '#ddecfa',
+    borderColor: white,
+    borderRadius: 5,
+    borderBottomWidth: 5,
+  },
+  ticketListVeramo: {
+    width: Dimensions.get('screen').width * 0.90,
+    backgroundColor: '#e4fef4',
+    borderColor: white,
+    borderRadius: 5,
+    borderBottomWidth: 5,
+  },
   headerLeft:{
     alignSelf: 'flex-start',
     marginStart: 10,
