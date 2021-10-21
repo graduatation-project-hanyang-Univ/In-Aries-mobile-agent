@@ -71,7 +71,7 @@ function CredentialOffered(props: ICredentialOffered) {
                 >
                 <View>
                   <Text style={[{ fontSize: 18, top: 15 }, AppStyles.textBlack, AppStyles.textBold]}>
-                    {props.contact.alias ? props.contact.alias : props.contact.invitation.label}
+                    {props.credential.attributes['name']}
                   </Text>
                   <Text style={[{ fontSize: 14 }, AppStyles.textSecondary]}>{props.contact.sublabel}</Text>
                 </View>

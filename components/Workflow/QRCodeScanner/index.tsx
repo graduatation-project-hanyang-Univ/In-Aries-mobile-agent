@@ -15,7 +15,9 @@ import AgentContext from '../../AgentProvider/'
 
 import Styles from './styles'
 import AppStyles from '../../../assets/styles'
-import {isVeramoVC, saveVeramoVC, verifyVeramoVP} from "../../Veramo";
+import {isVeramoVC, saveVeramoVC, verifyVeramoVP} from "../../Veramo"
+import CredentialOfferedVeramo from '../Credential/OfferedVeramo/index'
+import VPRequestReceivedVeramo from '../Credential/VPRequestReceivedVeramo/index'
 
 //  TODO - Add props interface
 function QRCodeScanner(props) {
@@ -28,6 +30,9 @@ function QRCodeScanner(props) {
 
   //State to determine if we should show the camera any longer
   const [cameraActive, setCameraActive] = useState(true)
+
+  const [credentialVeramo, setCredentialVeramo] = useState('')
+  const [VPVeramo, setVPVeramo] = useState('')
 
   const barcodeRecognized = ({ barcodes }) => {
     barcodes.forEach(async (barcode) => {
@@ -58,14 +63,12 @@ function QRCodeScanner(props) {
 
       if(await isVeramoVC(jwt)) {
         console.info('veramo VC qr code data')
-        await saveVeramoVC(jwt);
-        props.setWorkflow('issued');
-        return;
+        setCredentialVeramo(jwt)
+        CredentialOfferedVeramo(jwt)
       } else {
         console.info('veramo VP qr code data')
-        const verified = await verifyVeramoVP(jwt)
-        // TODO 실패 시 핸들링
-        props.setWorkflow('verified');
+        setVPVeramo(jwt)
+        VPRequestReceivedVeramo(jwt)
         return;
       }
     });
@@ -99,7 +102,15 @@ function QRCodeScanner(props) {
         </View>
       </>
     )
-  } else {
+  } 
+  else if(credentialVeramo != ''){
+    return <CredentialOfferedVeramo jwt={credentialVeramo}/>
+  }
+  else if(VPVeramo != ''){
+    return <VPRequestReceivedVeramo jwt={VPVeramo}/>
+
+  }
+  else {
     return <LoadingOverlay />
   }
 }

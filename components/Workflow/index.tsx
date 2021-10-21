@@ -29,7 +29,7 @@ function Workflow(props: IWorkflow) {
 
   const [connection, setConnection] = useState(undefined)
   const [credential, setCredential] = useState(undefined)
-
+  
   //Reference to the agent context
   const agentContext = useContext(AgentContext)
 
