@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react'
-
 import { Image, Text, TouchableOpacity, View, ScrollView, TouchableHighlight } from 'react-native'
-
 import { useHistory } from 'react-router-native'
 
 import AppHeader from '../AppHeader/index'
 import BackButton from '../BackButton/index'
 import CurrentCredential from '../CurrentCredential/index'
+import CurrentCredentialVeramo from '../CurrentCredentialVeramo/index'
+import { getAllVeramoVCs } from '../Veramo/index'
 // import NoTicketPage from '../NoTicketPage/index'
-
 import AgentContext from '../AgentProvider/'
-import { CredentialEventType } from 'aries-framework'
-
 import AppStyles from '../../assets/styles'
 import Styles from './styles'
+
+import { CredentialEventType } from 'aries-framework'
+import { ConnectionsModule } from 'aries-framework/build/src/modules/connections/ConnectionsModule'
 
 interface IListCredentials {}
 
@@ -25,12 +25,17 @@ function ListCredentials(props: IListCredentials) {
 
   //Credential List State
   const [credentials, setCredentials] = useState([])
+  const [veramoCredentials, setVeramoCredentials] = useState([])
+  const [veramoCredentialDatas, setVeramoCredentialDatas] = useState([])
 
   //Function to get all credentials and set the state
   const getCredentials = async () => {
     const credentials = await agentContext.agent.credentials.getAll()
+    const veramoCredentials = await getAllVeramoVCs()
+    
     console.log(credentials)
 
+    // Indy credential
     const credentialsForDisplay = []
 
     for (const credential of credentials) {
@@ -46,6 +51,18 @@ function ListCredentials(props: IListCredentials) {
     console.log('credentialsForDisplay', credentialsForDisplay)
     //TODO: Filter credentials for display
     setCredentials(credentialsForDisplay)
+
+    // Veramo credential
+    const veramoCredentialsForDisplay = []
+    const veramoCredentialData = []
+
+    for( const veramoCredential of veramoCredentials){
+      veramoCredentialsForDisplay.push(veramoCredential.verifiableCredential.credentialSubject.name)
+      veramoCredentialData.push(veramoCredential.verifiableCredential.credentialSubject)
+    }
+    setVeramoCredentials(veramoCredentialsForDisplay)
+    setVeramoCredentialDatas(veramoCredentialData)
+
   }
 
   //On Component Load Fetch all Connections
@@ -71,7 +88,10 @@ function ListCredentials(props: IListCredentials) {
   }, [agentContext.loading])
 
   const [viewInfo, setViewInfo] = useState('')
+  const [viewIndex, setViewIndex] = useState(0)
   const [viewCredential, setViewCredential] = useState(false)
+  const [viewVeramoCredential, setViewVeramoCredential] = useState(false)
+
 
   return (
     <>
@@ -81,25 +101,44 @@ function ListCredentials(props: IListCredentials) {
           <AppHeader headerText={'Tickets'} />
         </View>
         <ScrollView>
-          <View style={[Styles.credView, AppStyles.backgroundWhite]}>
-            {credentials.map((credential, i) => (
-              <TouchableHighlight onPress={() => {
-                setViewInfo(credential)
-                setViewCredential(true)
-              }}>
-              <View key={i} style={[AppStyles.tableItem, Styles.tableItem, AppStyles.ticketList]}>
-                <View>
-                  <Text style={[{ fontSize: 18}, AppStyles.textBlack, AppStyles.textBold]}>
-                    {credential.attributes.name}
-                  </Text>
+          <View style={Styles.credView}>
+            <View style={[AppStyles.backgroundWhite]}>
+              {credentials.map((credential, i) => (
+                <TouchableHighlight onPress={() => {
+                  setViewInfo(credential)
+                  setViewCredential(true)
+                }}>
+                <View key={i} style={[AppStyles.tableItem, Styles.tableItem, AppStyles.ticketListIndy]}>
+                  <View>
+                    <Text style={[{ fontSize: 18}, AppStyles.textBlack, AppStyles.textBold]}>
+                      {credential.attributes.name}
+                    </Text>
+                  </View>
                 </View>
-              </View>
-              </TouchableHighlight>
-            ))}
+                </TouchableHighlight>
+              ))}
+            </View>
+            <View style={[AppStyles.backgroundWhite]}>
+              {veramoCredentials.map((veramoCredential, i) => (
+                <TouchableHighlight onPress={() => {
+                  setViewIndex(i)
+                  setViewVeramoCredential(true)
+                }}>
+                <View key={i} style={[AppStyles.tableItem, Styles.tableItem, AppStyles.ticketListVeramo]}>
+                  <View>
+                    <Text style={[{ fontSize: 18}, AppStyles.textBlack, AppStyles.textBold]}>
+                      {veramoCredential}
+                    </Text>
+                  </View>
+                </View>
+                </TouchableHighlight>
+              ))}
+            </View>
           </View>
         </ScrollView>
       </View>
       {viewCredential ? <CurrentCredential credential={viewInfo} setViewCredential={setViewCredential} /> : null}
+      {viewVeramoCredential ? <CurrentCredentialVeramo index={viewIndex} data={veramoCredentialDatas} setViewVeramoCredential={setViewVeramoCredential} /> : null}
     </>
   )
 }
