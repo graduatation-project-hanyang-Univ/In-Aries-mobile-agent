@@ -16,7 +16,7 @@ function VPRequestReceivedVeramo(props) {
 
     //Reference to the agent context
     const agentContext = useContext(AgentContext)
-      
+
     const list = async () => {
         const decodedData = await decodeVeramoVC(props.jwt)
         const required_list = decodedData.data.claims
@@ -36,8 +36,9 @@ function VPRequestReceivedVeramo(props) {
         const verified = await verifyVeramoVP(props.jwt)
         if(verified){
             history.push('/vp-workflow/verified')
+        } else {
+            history.push('/vp-workflow/rejected')
         }
-        // TODO 실패 시 핸들링
     }
 
     const goAlert = async () => {
@@ -92,7 +93,7 @@ function VPRequestReceivedVeramo(props) {
                                 {isSelected ? acceptProofRequest() : goAlert()}
                             }}
                         >
-                            <View style={Styles.buttonAccept}> 
+                            <View style={Styles.buttonAccept}>
                                 <Text style={[AppStyles.textWhite,{fontSize: 17}]}>Accept</Text>
                             </View>
                         </TouchableOpacity>
