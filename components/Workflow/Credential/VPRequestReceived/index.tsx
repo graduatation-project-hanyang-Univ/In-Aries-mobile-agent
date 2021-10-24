@@ -24,7 +24,7 @@ function VPRequestReceived(props: IVPRequestReceived) {
 
     //Reference to the agent context
     const agentContext = useContext(AgentContext)
-      
+
 
     const getRetrievedCredentials = async () => {
         const temp = await agentContext.agent.proofs.getById(props.proofRecord.id);
@@ -44,13 +44,21 @@ function VPRequestReceived(props: IVPRequestReceived) {
 
     useEffect(() => {
         getRetrievedCredentials()
+          .catch(() => {
+              console.log('gathering credential for VP Request is failed');
+          })
+
     }, [])
 
     const acceptProofRequest = async () => {
         console.log('Attempting to accept proof request')
-        await agentContext.agent.proofs.acceptRequest(props.proofRecord.id, retrievedCredentials)
-
-        history.push('/vp-workflow/pending')
+        try {
+            await agentContext.agent.proofs.acceptRequest(props.proofRecord.id, retrievedCredentials)
+            history.push('/vp-workflow/pending')
+        } catch (e) {
+            console.log('VP Verification failed')
+            history.push('/vp-workflow/rejected')
+        }
     }
 
     const goAlert = async () => {
@@ -132,7 +140,7 @@ function VPRequestReceived(props: IVPRequestReceived) {
                                 {isSelected && isPredictionSelected ? acceptProofRequest() : goAlert()}
                             }}
                         >
-                            <View style={Styles.buttonAccept}> 
+                            <View style={Styles.buttonAccept}>
                                 <Text style={[AppStyles.textWhite,{fontSize: 17}]}>Accept</Text>
                             </View>
                         </TouchableOpacity>
