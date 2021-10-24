@@ -106,6 +106,15 @@ function VPWorkflow(props: IWorkflow) {
                     )
                 }}
             />
+          <Route
+            path={`${url}/rejected`}
+            render={() => {
+              return (
+                <Message title={'Rejected'} path={'/home'} bgColor={'#FFFFFF'} textLight={true}>
+                </Message>
+              )
+            }}
+          />
         </View>
     )
 }
